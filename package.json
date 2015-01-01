@@ -1,0 +1,29 @@
+{
+  "name": "bedrock-passport",
+  "version": "0.0.1",
+  "description": "Bedrock passport module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitalbazaar/bedrock-passport"
+  },
+  "keywords": [
+    "bedrock",
+    "passport"
+  ],
+  "author": {
+    "name": "Digital Bazaar, Inc.",
+    "email": "support@digitalbazaar.com",
+    "url": "http://digitalbazaar.com"
+  },
+  "bugs": {
+    "url": "https://github.com/digitalbazaar/bedrock-passport/issues"
+  },
+  "homepage": "https://github.com/digitalbazaar/bedrock-passport",
+  "peerDependencies": {
+    "bedrock": "~0.3.0"
+  }
+}
