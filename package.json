@@ -32,10 +32,10 @@
   },
   "peerDependencies": {
     "bedrock": "~0.3.0",
-    "bedrock-docs": "~0.1.0",
-    "bedrock-identity": "~0.1.0",
-    "bedrock-rest": "~0.1.0",
-    "bedrock-views": "~0.1.0"
+    "bedrock-docs": "~0.0.1",
+    "bedrock-identity": "~0.0.1",
+    "bedrock-rest": "~0.0.1",
+    "bedrock-views": "~0.0.1"
   },
   "directories": {
     "lib": "./lib"
