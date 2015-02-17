@@ -11,4 +11,4 @@
 - See git history for changes.
 
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/digitalbazaar/bedrock-passport/compare/0.1.0...HEAD
