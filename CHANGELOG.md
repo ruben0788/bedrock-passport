@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- Support for `bedrock-express` 0.2.x.
+
 ### Changed
 - **BREAKING**: `bedrock.HttpSignatureStrategy.*` error types renamed to `HttpSignature.*`.
 
