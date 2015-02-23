@@ -26,8 +26,8 @@
   "dependencies": {
     "async": "~0.9.0",
     "http-signature": "git://github.com/digitalbazaar/node-http-signature",
-    "passport": "~0.1.9",
-    "passport-local": "~0.1.3",
+    "passport": "~0.2.1",
+    "passport-local": "~1.0.0",
     "underscore": "~1.7.0"
   },
   "peerDependencies": {
