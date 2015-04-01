@@ -3,10 +3,6 @@
 A [bedrock][] module that adds website or REST API authentication to
 [bedrock][] via [passport][].
 
-Authentication methods supported:
-- Website session based on user and password.
-- [HTTP Signatures][].
-
 ## Quick Examples
 
 ```
@@ -28,6 +24,25 @@ app.server.post('/resources/:resourceId',
 ## Configuration
 
 For documentation on configuration, see [config.js](./lib/config.js).
+
+
+## Authentication
+
+There are a number of ways a client may authenticate itself with the REST API.
+These methods include:
+
+- Website session based on user and password and using cookies.
+- [HTTP Signatures][]
+
+### Cookies
+
+This method of authentication is useful for clients that are under your control
+and who you trust with your password to the service.
+
+### HTTP Signatures
+
+[HTTP Signatures][]-based authentication which is useful for non-interactive
+clients, and clients that you do not want to provide a password for.
 
 ## API
 
