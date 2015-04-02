@@ -25,7 +25,6 @@ app.server.post('/resources/:resourceId',
 
 For documentation on configuration, see [config.js](./lib/config.js).
 
-
 ## Authentication
 
 There are a number of ways a client may authenticate itself with the REST API.
