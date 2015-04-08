@@ -1,6 +1,6 @@
 {
   "name": "bedrock-passport",
-  "version": "0.1.2-dev",
+  "version": "1.0.0",
   "description": "Bedrock passport module",
   "main": "./lib/passport",
   "scripts": {
@@ -31,9 +31,9 @@
     "underscore": "~1.7.0"
   },
   "peerDependencies": {
-    "bedrock": "~0.3.0",
-    "bedrock-express": "~0.1.0 || ~0.2.0",
-    "bedrock-identity": "~0.1.0"
+    "bedrock": "^1.0.0",
+    "bedrock-express": "^1.0.0",
+    "bedrock-identity": "^1.0.0"
   },
   "directories": {
     "lib": "./lib"
