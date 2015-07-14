@@ -13,7 +13,7 @@ npm install bedrock-passport
 var brPassport = require('bedrock-passport');
 
 app.server.post('/resources/:resourceId',
-  ensureAuthenticated,
+  brPassport.ensureAuthenticated,
   function(req, res, next) {
     // resourceId available with req.params.resourceId
     // user identity available with req.user.identity
