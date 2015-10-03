@@ -25,6 +25,7 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-passport",
   "dependencies": {
     "async": "^1.4.2",
+    "credentials-io": "0.0.0",
     "http-signature": "git://github.com/digitalbazaar/node-http-signature",
     "passport": "~0.2.1",
     "underscore": "~1.7.0"
