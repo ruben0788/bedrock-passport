@@ -25,10 +25,10 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-passport",
   "dependencies": {
     "async": "^1.4.2",
-    "credentials-io": "git@github.com:digitalbazaar/credentials-io#master",
-    "http-signature": "git@github.com:digitalbazaar/node-http-signature",
-    "passport": "~0.2.1",
-    "underscore": "~1.7.0"
+    "credentials-io": "digitalbazaar/credentials-io#master",
+    "http-signature": "digitalbazaar/node-http-signature",
+    "lodash": "^3.10.1",
+    "passport": "~0.2.1"
   },
   "peerDependencies": {
     "bedrock": "^1.0.0",
