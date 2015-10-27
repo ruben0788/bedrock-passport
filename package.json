@@ -27,7 +27,7 @@
     "async": "^1.4.2",
     "credentials-io": "digitalbazaar/credentials-io#master",
     "did-io": "^0.6.1",
-    "http-signature": "digitalbazaar/node-http-signature",
+    "http-signature": "^1.0.2",
     "lodash": "^3.10.1",
     "passport": "~0.2.1"
   },
