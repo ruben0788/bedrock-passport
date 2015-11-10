@@ -25,7 +25,7 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-passport",
   "dependencies": {
     "async": "^1.4.2",
-    "credentials-io": "digitalbazaar/credentials-io#master",
+    "credentials-io": "~0.2.0",
     "did-io": "^0.6.1",
     "http-signature": "^1.0.2",
     "lodash": "^3.10.1",
@@ -34,7 +34,7 @@
   "peerDependencies": {
     "bedrock": "^1.0.0",
     "bedrock-express": "^1.0.0",
-    "bedrock-identity": "^1.0.0"
+    "bedrock-identity": "digitalbazaar/bedrock-identity#2.x"
   },
   "directories": {
     "lib": "./lib"
