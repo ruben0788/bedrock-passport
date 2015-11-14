@@ -17,7 +17,7 @@ app.server.post('/resources/:resourceId',
   function(req, res, next) {
     // resourceId available with req.params.resourceId
     // user identity available with req.user.identity
-    res.status(204).end();
+    res.sendStatus(204);
   });
 ```
 
