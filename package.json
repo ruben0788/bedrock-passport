@@ -34,7 +34,8 @@
   "peerDependencies": {
     "bedrock": "^1.0.0",
     "bedrock-express": "^1.0.0",
-    "bedrock-identity": "digitalbazaar/bedrock-identity#2.x"
+    "bedrock-identity": "digitalbazaar/bedrock-identity#2.x",
+    "bedrock-key": "digitalbazaar/bedrock-key#master"
   },
   "directories": {
     "lib": "./lib"
