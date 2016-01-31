@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [2.0.0] - 2016-01-31
+
+### Changed
+- **BREAKING**: Modular redesign.
+- **BREAKING**: Better extensibility and configurability.
+
 ### Added
 - Minor CSRF protections. When using authentication middleware, session-based
   authentication will only be counted as valid under certain conditions. If
@@ -10,6 +16,7 @@
   counted. If an `Origin` header is in the request but its host value does not
   match the `Host` header and the method is not GET, HEAD, or OPTIONS, it will
   not be counted.
+- Strategy for authenticating via DIDs.
 
 ## [1.0.1] - 2015-05-07
 
@@ -27,7 +34,8 @@
 
 - See git history for changes.
 
-[Unreleased]: https://github.com/digitalbazaar/bedrock-passport/compare/1.0.1...HEAD
+[Unreleased]: https://github.com/digitalbazaar/bedrock-passport/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/digitalbazaar/bedrock-passport/compare/1.0.1...2.0.0
 [1.0.1]: https://github.com/digitalbazaar/bedrock-passport/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/digitalbazaar/bedrock-passport/compare/0.1.1...1.0.0
 [0.1.1]: https://github.com/digitalbazaar/bedrock-passport/compare/0.1.0...0.1.1
