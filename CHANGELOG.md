@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## Changed
+- Support non-persistent users in HttpSignatureStrategy.
+
 ## [2.0.0] - 2016-01-31
 
 ### Changed
