@@ -61,9 +61,22 @@ Code using this call can check if the request is authenticated by testing if
 Ensure a request has been authenticated via `optionallyAuthenticated`. Redirect
 if not and it looks like a browser GET request, otherwise set a 400 error.
 
-### login(req, res, next, callback(err, user, choice))
+### authenticate(strategy, options, callback(err, user, info))
 
-Attempt to establish an authorized session for the user that sent the request.
+Attempt to authenticate a user using the specified strategy. If authentication
+is successful, a `bedrock-passport.authenticate` event is emitted with an
+object with this format:
+
+```js
+{
+  strategy: strategy,
+  options: options,
+  user: user,
+  info: info
+}
+```
+
+Once all event handlers have run, `callback` is called.
 
 [bedrock]: https://github.com/digitalbazaar/bedrock
 [passport]: https://github.com/jaredhanson/passport
