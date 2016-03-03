@@ -1,6 +1,6 @@
 {
   "name": "bedrock-passport",
-  "version": "2.0.2-dev",
+  "version": "3.0.0-dev",
   "description": "Bedrock passport module",
   "main": "./lib/passport",
   "scripts": {
@@ -25,6 +25,10 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-passport",
   "dependencies": {
     "async": "^1.5.2",
+    "bedrock": "^1.0.0",
+    "bedrock-express": "^2.0.0",
+    "bedrock-identity": "^3.0.0",
+    "bedrock-key": "^2.0.0",
     "credentials-io": "~0.2.0",
     "did-io": "^0.6.1",
     "http-signature": "^1.0.2",
@@ -33,9 +37,9 @@
   },
   "peerDependencies": {
     "bedrock": "^1.0.0",
-    "bedrock-express": "^1.4.0",
-    "bedrock-identity": "^2.0.0",
-    "bedrock-key": "^1.0.0"
+    "bedrock-express": "^2.0.0",
+    "bedrock-identity": "^3.0.0",
+    "bedrock-key": "^2.0.0"
   },
   "directories": {
     "lib": "./lib"

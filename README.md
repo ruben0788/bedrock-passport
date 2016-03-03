@@ -3,6 +3,10 @@
 A [bedrock][] module that adds website or REST API authentication to
 [bedrock][] via [passport][].
 
+## Requirements
+
+- npm v3+
+
 ## Quick Examples
 
 ```
