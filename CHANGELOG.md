@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [3.0.1] - 2016-03-16
+
+### Changed
+- Add public key lookup for HTTPSignature keyIds that are dids.
+
 ## [3.0.0] - 2016-03-02
 
 ### Changed
@@ -44,7 +49,8 @@
 
 - See git history for changes.
 
-[Unreleased]: https://github.com/digitalbazaar/bedrock-passport/compare/3.0.0...HEAD
+[Unreleased]: https://github.com/digitalbazaar/bedrock-passport/compare/3.0.1...HEAD
+[3.0.1]: https://github.com/digitalbazaar/bedrock-passport/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/digitalbazaar/bedrock-passport/compare/2.0.1...3.0.0
 [2.0.1]: https://github.com/digitalbazaar/bedrock-passport/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/digitalbazaar/bedrock-passport/compare/1.0.1...2.0.0
