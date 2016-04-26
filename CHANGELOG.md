@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-## [3.0.2] - 2016-03-15
+## [3.0.3] - 2016-04-26
+
+## [3.0.2] - 2016-04-15
 
 ### Changed
 - Update bedrock dependencies.
@@ -54,7 +56,8 @@
 
 - See git history for changes.
 
-[Unreleased]: https://github.com/digitalbazaar/bedrock-passport/compare/3.0.2...HEAD
+[Unreleased]: https://github.com/digitalbazaar/bedrock-passport/compare/3.0.3...HEAD
+[3.0.3]: https://github.com/digitalbazaar/bedrock-passport/compare/3.0.2...3.0.3
 [3.0.2]: https://github.com/digitalbazaar/bedrock-passport/compare/3.0.1...3.0.2
 [3.0.1]: https://github.com/digitalbazaar/bedrock-passport/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/digitalbazaar/bedrock-passport/compare/2.0.1...3.0.0
