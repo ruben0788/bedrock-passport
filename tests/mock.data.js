@@ -14,11 +14,6 @@ module.exports = data;
 var identities = {};
 data.identities = identities;
 
-
-//config.server.host = "bedrock.dev:18444";
-
-console.log(">>>> mock.data config", config.server.host);
-
 // admin user with a valid 2048 bit RSA keypair and issuer permissions
 var userName = 'mock';
 identities[userName] = {};
@@ -71,7 +66,7 @@ identities[userName].keys = helpers.createKeyPair({
 data.key = {
   '@context': 'https://w3id.org/identity/v1',
   'type': 'CryptographicKey',
-  'owner': 'https://' + config.server.host + '/i/mock',
+  'owner': 'https://' + config.server.host + '/tests/i/mock',
   'label': 'Access Key 1',
   'publicKeyPem': '-----BEGIN PUBLIC KEY-----\n' +
     'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwzPDp8kvJlGHbQGHQGcp\n' +
@@ -82,37 +77,18 @@ data.key = {
     'G3KZD+iAayrF3xXz8ZPe0PY+6nZZi5/4HNy6B/30hAQn9X9I/0WMmmbQ5gCHJsu9\n' +
     'WwIDAQAB\n' +
     '-----END PUBLIC KEY-----\n',
-  'id': 'https://' + config.server.host + '/keys/1.1.56.1',
+  'id': 'https://' + config.server.host + '/tests/keys/1',
   'sysStatus': 'active'
 };
 
 data.owner1 = {
   '@context': 'https://w3id.org/identity/v1',
-  'id': 'https://' + config.server.host + '/i/mock',
+  'id': 'https://' + config.server.host + '/tests/i/mock',
   'type': 'Identity',
   'publicKey': {
     'type': 'CryptographicKey',
-    'owner': 'https://' + config.server.host + '/i/mock',
+    'owner': 'https://' + config.server.host + '/tests/i/mock',
     'label': 'Access Key 1',
-    'id': 'https://' + config.server.host + '/keys/1.1.56.1'
+    'id': 'https://' + config.server.host + '/tests/keys/1'
   }
 };
-/*
-data.owner2 = {
-  '@context': 'https://w3id.org/identity/v1',
-  'id': 'https://' + config.server.host + '/i/mock',
-  'type': 'Identity',
-  'publicKey': [{
-      'type': 'CryptographicKey',
-      'owner': 'https://' + config.server.host + '/i/mock',
-      'label': 'Access Key 1',
-      'id': 'https://' + config.server.host + '/keys/1.1.56.1'
-    }, {
-      'type': 'CryptographicKey',
-      'owner': 'https://' + config.server.host + '/i/mock',
-      'label': 'Access Key 2',
-      'id': 'https://' + config.server.host + '/keys/1.1.56.2'
-    }
-  ]
-};
-*/

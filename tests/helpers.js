@@ -18,10 +18,6 @@ var database = require('bedrock-mongodb');
 var api = {};
 module.exports = api;
 
-//config.server.host = "bedrock.dev:18444";
-
-console.log(">>>> helpers config", config.server.host);
-
 api.createHttpSignatureRequest = function(url, identity) {
   var newRequest = {
     url: url,
@@ -37,7 +33,7 @@ api.createHttpSignatureRequest = function(url, identity) {
 // FIXME: Don't use truecred as host.
 api.createIdentity = function(userName) {
   var newIdentity = {
-    id: 'https://' + config.server.host + '/i/' + userName,
+    id: 'https://' + config.server.host + '/tests/i/' + userName,
     type: 'Identity',
     sysSlug: userName,
     label: userName,
@@ -65,7 +61,7 @@ api.createKeyPair = function(options) {
   var newKeyPair = {
     publicKey: {
       '@context': 'https://w3id.org/identity/v1',
-      id: 'https://' + config.server.host + '/keys/1.1.56.1',
+      id: 'https://' + config.server.host + '/tests/keys/1',
       type: 'CryptographicKey',
       owner: ownerId,
       label: 'Signing Key 1',
@@ -75,7 +71,7 @@ api.createKeyPair = function(options) {
       type: 'CryptographicKey',
       owner: ownerId,
       label: 'Signing Key 1',
-      publicKey: 'https://' + config.server.host + '/keys/1.1.56.1',
+      publicKey: 'https://' + config.server.host + '/tests/keys/1',
       privateKeyPem: privateKey
     }
   };

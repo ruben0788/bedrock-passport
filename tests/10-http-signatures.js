@@ -21,44 +21,39 @@ var util = bedrock.util;
 var request = require('request');
 request = request.defaults({json: true, strictSSL: false});
 
-var HttpSignatureStrategy = require('../lib/HttpSignatureStrategy');
-
-var strategy = new HttpSignatureStrategy();
-
-console.log(">>>>10-http-signature config", config.server.host);
-
 var urlObj = {
   protocol: 'https',
   host: config.server.host,
   pathname: '/tests/bedrock-passport/http-signature-test'
 };
 
-describe('bedrock-passport http-signature queries', function() {
+describe('bedrock-passport', function() {
   before('Prepare the database', function(done) {
     helpers.prepareDatabase(mockData, done);
   });
   after('Remove test data', function(done) {
     helpers.removeCollections(done);
   });
-  beforeEach('Erase credentials', function(done) {
-    helpers.removeCollection('credentialProvider', done);
-  });
-  describe('authenticated requests with no URL parameters', function() {
+  describe('authenticated requests using http-signature', function() {
     var user = mockData.identities.mock;
-    it.only('completes successfully', function(done) {
+    it('completes successfully', function(done) {
       async.auto({
-        query: function(callback) {
+        authenticate: function(callback) {
           var clonedUrlObj = util.clone(urlObj);
           request.get(
               helpers.createHttpSignatureRequest(
                   url.format(clonedUrlObj), user),
             function(err, res, body) {
-              console.log("TEST RESULT,", body);
-              should.not.exist(err);
-              should.exist(body);
-              callback();
+              callback(err, body);
             });
-        }
+        },
+        checkResults: ['authenticate', function(callback, results) {
+          var identity = results.authenticate.identity;
+          should.exist(identity);
+          identity.id.should.equal(user.identity.id);
+          identity.email.should.equal(user.identity.email);
+          callback();
+        }]
       }, done);
     });
   });
