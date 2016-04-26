@@ -33,12 +33,6 @@ var urlObj = {
   pathname: '/tests/bedrock-passport/http-signature-test'
 };
 
-var urlObjKey = {
-  protocol: 'https',
-  host: config.server.host,
-  pathname: '/keys/1.1.56.1'
-};
-
 describe('bedrock-passport http-signature queries', function() {
   before('Prepare the database', function(done) {
     helpers.prepareDatabase(mockData, done);
@@ -53,23 +47,7 @@ describe('bedrock-passport http-signature queries', function() {
     var user = mockData.identities.mock;
     it.only('completes successfully', function(done) {
       async.auto({
-
-        testData: function(callback) {
-          /*
-          var clonedUrlObj = util.clone(urlObjKey);
-          console.log('cloned object', clonedUrlObj);
-          console.log("Hitting mock key endpoint", url.format(clonedUrlObj));
-          request.get(url.format(clonedUrlObj),
-            function(err, res, body) {
-              console.log("test data hit result", body);
-              should.not.exist(err);
-              should.exist(body);
-              callback();
-            });
-          */
-            callback();
-        },
-        query: ['testData', function(callback) {
+        query: function(callback) {
           var clonedUrlObj = util.clone(urlObj);
           request.get(
               helpers.createHttpSignatureRequest(
@@ -80,7 +58,7 @@ describe('bedrock-passport http-signature queries', function() {
               should.exist(body);
               callback();
             });
-        }]
+        }
       }, done);
     });
   });

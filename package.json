@@ -29,7 +29,8 @@
     "did-io": "^0.6.1",
     "http-signature": "^1.0.2",
     "lodash": "^4.0.0",
-    "passport": "~0.2.1"
+    "passport": "~0.2.1",
+    "jsonld": "^0.4.2"
   },
   "peerDependencies": {
     "bedrock": "^1.0.0",

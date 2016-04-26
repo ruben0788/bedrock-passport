@@ -15,7 +15,7 @@ var identities = {};
 data.identities = identities;
 
 
-config.server.host = "bedrock.dev:18444";
+//config.server.host = "bedrock.dev:18444";
 
 console.log(">>>> mock.data config", config.server.host);
 

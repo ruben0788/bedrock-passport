@@ -8,27 +8,27 @@ var brPassport = require('../lib/passport.js');
 
 var HttpSignatureStrategy = require('../lib/HttpSignatureStrategy');
 var signatureStrategy = new HttpSignatureStrategy();
-
-var mockData = require('../tests/mock.data');
-require('../tests/helpers')
 bedrock.events.on('bedrock-express.configure.routes', addMockRoutes);
 
 bedrock.start();
 
 function addMockRoutes(app) {
   console.log('$@#@$@#@#$ Adding mock routes');
+  var mockData = require('../tests/mock.data');
   app.get('/tests/bedrock-passport/http-signature-test',
-    rest.when.prefers.jsonld, brPassport.optionallyAuthenticated,
+    rest.when.prefers.jsonld,
     rest.linkedDataHandler({
       get: function(req, res, callback) {
-        console.log('Signature authenticate called');
+        console.log('====== Signature authenticate called =========');
         signatureStrategy.authenticate(req);
-        callback(null, key);
+        brPassport.authenticate('signature', {}, function(err, results) {
+          callback(null, results);
+        });
       }
     })
   );
   app.get('/keys/1.1.56.1',
-    rest.when.prefers.jsonld, brPassport.optionallyAuthenticated,
+    rest.when.prefers.jsonld,
     rest.linkedDataHandler({
       get: function(req, res, callback) {
         console.log('===== KEYS MOCK DATA ENDPOINT HIT ====');
@@ -38,7 +38,7 @@ function addMockRoutes(app) {
     })
   );
   app.get('/i/mock',
-    rest.when.prefers.jsonld, brPassport.optionallyAuthenticated,
+    rest.when.prefers.jsonld,
     rest.linkedDataHandler({
       get: function(req, res, callback) {
         var owner1 = mockData.owner1;

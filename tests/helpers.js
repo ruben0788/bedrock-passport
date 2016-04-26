@@ -18,7 +18,7 @@ var database = require('bedrock-mongodb');
 var api = {};
 module.exports = api;
 
-config.server.host = "bedrock.dev:18444";
+//config.server.host = "bedrock.dev:18444";
 
 console.log(">>>> helpers config", config.server.host);
 
