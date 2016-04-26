@@ -6,6 +6,7 @@
 'use strict';
 
 var helpers = require('./helpers');
+var config = require('bedrock').config;
 
 var data = {};
 module.exports = data;
@@ -13,57 +14,13 @@ module.exports = data;
 var identities = {};
 data.identities = identities;
 
-// admin user with a valid 2048 bit RSA keypair and issuer permissions
-var userName = 'adminUser';
-identities[userName] = {};
-identities[userName].identity = helpers.createIdentity(userName);
-identities[userName].identity.sysResourceRole.push({
-  sysRole: 'credential.admin' //,
-  // generateResource: 'id'
-});
-identities[userName].keys = helpers.createKeyPair({
-  userName: userName,
-  userId: identities[userName].identity.id,
-  publicKey: '-----BEGIN PUBLIC KEY-----\n' +
-    'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqv8gApfU3FhZx1gyKmBU\n' +
-    'czZ1Ba3DQbqcGRJiwWz6wrr9E/K0PcpRws/+GPc1znG4cKLdxkdyA2zROUt/lbaM\n' +
-    'TU+/kZzRh3ICZZOuo8kJpGqxPDIm7L1lIcBLOWu/UEV2VaWNOENwiQbh61VJlR+k\n' +
-    'HK9LhQxYYZT554MYaXzcSRTC/RzHDTAocf+B1go8tawPEixgs93+HHXoLPGypmqn\n' +
-    'lBKAjmGMwizbWFccDQqv0yZfAFpdVY2MNKlDSUNMnZyUgBZNpGOGPm9zi9aMFT2d\n' +
-    'DrN9fpWMdu0QeZrJrDHzk6TKwtKrBB9xNMuHGYdPxy8Ix0uNmUt0mqt6H5Vhl4O0\n' +
-    '0QIDAQAB\n' +
-    '-----END PUBLIC KEY-----\n',
-  privateKey: '-----BEGIN RSA PRIVATE KEY-----\n' +
-    'MIIEpQIBAAKCAQEAqv8gApfU3FhZx1gyKmBUczZ1Ba3DQbqcGRJiwWz6wrr9E/K0\n' +
-    'PcpRws/+GPc1znG4cKLdxkdyA2zROUt/lbaMTU+/kZzRh3ICZZOuo8kJpGqxPDIm\n' +
-    '7L1lIcBLOWu/UEV2VaWNOENwiQbh61VJlR+kHK9LhQxYYZT554MYaXzcSRTC/RzH\n' +
-    'DTAocf+B1go8tawPEixgs93+HHXoLPGypmqnlBKAjmGMwizbWFccDQqv0yZfAFpd\n' +
-    'VY2MNKlDSUNMnZyUgBZNpGOGPm9zi9aMFT2dDrN9fpWMdu0QeZrJrDHzk6TKwtKr\n' +
-    'BB9xNMuHGYdPxy8Ix0uNmUt0mqt6H5Vhl4O00QIDAQABAoIBAQCpA3yXM42AsY8j\n' +
-    'mwgSnJ48NqJaF5L8P7+UhHi6KMZ+fSYydl0zCevge4bzFD3JrNuZ8VD1b57AxejT\n' +
-    'Ec2so/9vVxjJi1AK6WR3FA608rumGJLQJd4Vd2ojfxabTeWOKOo642R/LSFpPzVE\n' +
-    'T0toqxqiA53IhxhAc2jDLO+PLIvrao0Y8bWWq36tbxsAplrv8Gms6ZRwfKoX5P32\n' +
-    'azBpJOqneNdSMRPHky6t2uiYyuPeG9pbuaClkD7Ss9lpH0V1DLQmAAlP9I0Aa06B\n' +
-    'a9zPFPb3Ae8F0HO/tsf8gIvrlT38JvLe5VuCS7/LQNCZguyPZuZOXLDmdETfm1FD\n' +
-    'q56rCV7VAoGBANmQ7EqDfxmUygTXlqaCQqNzY5pYKItM6RFHc9I+ADBWsLbuKtfP\n' +
-    'XUMHQx6PvwCMBpjZkM7doGdzOHb0l3rW8zQONayqQxN9Pjd7K+dkSY6k0SScw46w\n' +
-    '0AexDQSM/0ahVAHfXXi1GbKwlonM0nn/7JHz7n/fL9HwV8T3hAGClbPDAoGBAMk0\n' +
-    'K5d+Ov55sKW0ZatZ0vTnfBCSrVEfG6FkcyK7uiSsMdWo2/De0VtJF7od2DM5UyP6\n' +
-    'Y/DSVk4oPepbug5oGdu8t1Q3jbS61A7i/dssirQC4hEFAtoTGsVfaH8wu4AKyWd7\n' +
-    '0rUmSrnyqNr4mfQBjdaXByvWO9rdEfZcZqaSQ4/bAoGAKy/CR7Q8eYZ4Z2eoBtta\n' +
-    'gPl5rvyK58PXi8+EJRqbjPzYTSePp5EI8TIy15EvF9uzv4mIXhfOLFrJvYsluoOK\n' +
-    'eS3M575QXEEDJZ40g9T7aO48eakIhH2CfdReQiX+0jVZ6Jk/A6PnOvokl6vpp7/u\n' +
-    'ZLZoBEf4RRMRSQ7czDPwpWMCgYEAlNWZtWuz+hBMgpcqahF9AprF5ICL4qkvSDjF\n' +
-    'Dpltfbk+9/z8DXbVyUANZCi1iFbMUJ3lFfyRySjtfBI0VHnfPvOfbZXWpi1ZtlVl\n' +
-    'UZ7mT3ief9aEIIrnT79ezk9fM71G9NzcphHYTyrYi3pAcAZCRM3diSjlh+XmZqY9\n' +
-    'bNRfU+cCgYEAoBYwp0PJ1QEp3lSmb+gJiTxfNwIrP+VLkWYzPREpSbghDYjE2DfC\n' +
-    'M8pNbVWpnOfT7OlhN3jw8pxHWap6PxNyVT2W/1AHNGKTK/BfFVn3nVGhOgPgH1AO\n' +
-    'sObYxm9gpkNkelXejA/trbLe4hg7RWNYzOztbfbZakdVjMNfXnyw+Q0=\n' +
-    '-----END RSA PRIVATE KEY-----\n'
-});
+
+config.server.host = "bedrock.dev:18444";
+
+console.log(">>>> mock.data config", config.server.host);
 
 // admin user with a valid 2048 bit RSA keypair and issuer permissions
-var userName = 'regularUser';
+var userName = 'mock';
 identities[userName] = {};
 identities[userName].identity = helpers.createIdentity(userName);
 identities[userName].identity.sysResourceRole.push({
@@ -111,36 +68,51 @@ identities[userName].keys = helpers.createKeyPair({
     '-----END RSA PRIVATE KEY-----\n'
 });
 
-// NOTE: does not include sysState (claimed or unclaimed)
-data.credentialTemplate = {
+data.key = {
   '@context': 'https://w3id.org/identity/v1',
-  issuer: 'did:603e6408-7afb-49e0-a484-b236ae2ba01f',
-  type: [
-    'Credential',
-    'BirthDateCredential'
-  ],
-  name: 'Birth Date Credential',
-  image: 'https://images.com/verified-email-badge',
-  issued: '2013-06-17T11:11:11Z',
-  claim: {
-    id: 'did:6ad81122-8dd7-4bdb-bcae-0b429ca7c97b',
-    birthDate: '1977-06-17T08:15:00Z',
-    birthPlace: {
-      address: {
-        type: 'PostalAddress',
-        streetAddress: '1000 Birthing Center Rd',
-        addressLocality: 'San Francisco',
-        addressRegion: 'CA',
-        postalCode: '98888-1234'
-      }
-    }
-  },
-  signature: {
-    type: 'GraphSignature2012',
-    created: '2015-07-24T12:48:38Z',
-    creator: 'https://example.com/keys/1',
-    signatureValue: 'lRBljDguLA316oTkXoHPxSFYziXTvSZn1Ap2IEZkDc0F93V5BN' +
-      'jHXtC+YS7SbwnYfgBb2d4WnvXDSxzGboAEEw/Jcc2/rz0uqfU1/Jbwps5pLMWnHS/' +
-      '5JY+9PPbHNS8PZSeonpEH2hTvK+ofv6CVu7voF3PK3q/Jw3tjmJ88XTA='
+  'type': 'CryptographicKey',
+  'owner': 'https://' + config.server.host + '/i/mock',
+  'label': 'Access Key 1',
+  'publicKeyPem': '-----BEGIN PUBLIC KEY-----\n' +
+    'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwzPDp8kvJlGHbQGHQGcp\n' +
+    'tO5iZG8iwED1QFNvJuKTZqYDoN44LUf95tYsjGqT38qj2/uo4zZRkfE3H1TEnsDo\n' +
+    'KbbRn1mqV3098sU/G9Kk8fsXL9eJrQ77sLoDQmZf0/huIqHw6/jN7m5p3bq80A0m\n' +
+    'gaJ56FuMq6IM4b9Sw40ajXTWQdiJqThN41eSHK01peT9jHMlnbQQwolqw0y9fkZ5\n' +
+    'oEGHezQH6+CVRXB2u7WveMWvow3+ssGDwoK6/YeSWUXFv0VZoQwVO0VmaIFcM11f\n' +
+    'G3KZD+iAayrF3xXz8ZPe0PY+6nZZi5/4HNy6B/30hAQn9X9I/0WMmmbQ5gCHJsu9\n' +
+    'WwIDAQAB\n' +
+    '-----END PUBLIC KEY-----\n',
+  'id': 'https://' + config.server.host + '/keys/1.1.56.1',
+  'sysStatus': 'active'
+};
+
+data.owner1 = {
+  '@context': 'https://w3id.org/identity/v1',
+  'id': 'https://' + config.server.host + '/i/mock',
+  'type': 'Identity',
+  'publicKey': {
+    'type': 'CryptographicKey',
+    'owner': 'https://' + config.server.host + '/i/mock',
+    'label': 'Access Key 1',
+    'id': 'https://' + config.server.host + '/keys/1.1.56.1'
   }
 };
+/*
+data.owner2 = {
+  '@context': 'https://w3id.org/identity/v1',
+  'id': 'https://' + config.server.host + '/i/mock',
+  'type': 'Identity',
+  'publicKey': [{
+      'type': 'CryptographicKey',
+      'owner': 'https://' + config.server.host + '/i/mock',
+      'label': 'Access Key 1',
+      'id': 'https://' + config.server.host + '/keys/1.1.56.1'
+    }, {
+      'type': 'CryptographicKey',
+      'owner': 'https://' + config.server.host + '/i/mock',
+      'label': 'Access Key 2',
+      'id': 'https://' + config.server.host + '/keys/1.1.56.2'
+    }
+  ]
+};
+*/
