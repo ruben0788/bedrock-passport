@@ -36,9 +36,13 @@ describe('bedrock-passport', function() {
   });
   describe('authenticated requests using http-signature', function() {
     var user = mockData.identities.mock;
-    it('completes successfully', function(done) {
+    it('dereference lookup completes successfully', function(done) {
       async.auto({
-        authenticate: function(callback) {
+        before: function(callback) {
+          // Remove keys from database to force a dereference on the key url
+          helpers.removeCollection('publicKey', callback);
+        },
+        authenticate: ['before', function(callback) {
           var clonedUrlObj = util.clone(urlObj);
           request.get(
               helpers.createHttpSignatureRequest(
@@ -46,7 +50,7 @@ describe('bedrock-passport', function() {
             function(err, res, body) {
               callback(err, body);
             });
-        },
+        }],
         checkResults: ['authenticate', function(callback, results) {
           var identity = results.authenticate.identity;
           should.exist(identity);

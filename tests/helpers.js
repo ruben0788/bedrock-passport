@@ -99,7 +99,7 @@ api.removeCollections = function(callback) {
     ['credentialProvider', 'identity', 'publicKey', 'eventLog'];
   database.openCollections(collectionNames, function(err) {
     async.each(collectionNames, function(collectionName, callback) {
-      database.collections[collectionName].find({}, callback);
+      database.collections[collectionName].remove({}, callback);
     }, function(err) {
       callback(err);
     });
@@ -110,7 +110,7 @@ api.removeCollection = function(collection, callback) {
   var collectionNames = [collection];
   database.openCollections(collectionNames, function(err) {
     async.each(collectionNames, function(collectionName, callback) {
-      database.collections[collectionName].find({}, callback);
+      database.collections[collectionName].remove({}, callback);
     }, function(err) {
       callback(err);
     });
