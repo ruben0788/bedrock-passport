@@ -5,14 +5,11 @@
 
  'use strict';
 
-var _ = require('lodash');
 var async = require('async');
 var bedrock = require('bedrock');
 var brKey = require('bedrock-key');
 var brIdentity = require('bedrock-identity');
 var config = require('bedrock').config;
-var uuid = require('node-uuid').v4;
-var util = bedrock.util;
 var database = require('bedrock-mongodb');
 
 var api = {};
@@ -30,7 +27,6 @@ api.createHttpSignatureRequest = function(url, identity) {
   return newRequest;
 };
 
-// FIXME: Don't use truecred as host.
 api.createIdentity = function(userName) {
   var newIdentity = {
     id: 'https://' + config.server.host + '/tests/i/' + userName,
