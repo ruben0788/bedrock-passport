@@ -22,17 +22,8 @@ var urlObj = {
 };
 
 describe('bedrock-passport', function() {
-  before('Prepare the database', function(done) {
-    helpers.prepareDatabase(mockData, done);
-  });
-  after('Remove test data', function(done) {
-    helpers.removeCollections(done);
-  });
   describe('authenticated requests using http-signature', function() {
     describe('using dereference lookup', function() {
-      before('Remove keys from DB to force a dereference', function(done) {
-        helpers.removeCollection('publicKey', done);
-      });
       var user = mockData.identities.mock;
       it('dereference lookup completes successfully', function(done) {
         async.auto({
@@ -45,10 +36,13 @@ describe('bedrock-passport', function() {
               });
           },
           checkResults: ['authenticate', function(callback, results) {
+            // Should return a barebones identity
             var identity = results.authenticate.identity;
+            console.log(identity);
             should.exist(identity);
+            should.exist(identity['@context']);
             identity.id.should.equal(user.identity.id);
-            identity.email.should.equal(user.identity.email);
+            should.not.exist(identity.email);
             callback();
           }]
         }, done);
