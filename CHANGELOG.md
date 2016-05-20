@@ -1,5 +1,12 @@
 # bedrock-passport ChangeLog
 
+## 3.1.1 - 2016-05-19
+
+### Fixed
+- Fix bug w/improperly setting the shared `callback` closure var
+  in `authenticate`.
+- Fix passing strategy options when using `createAuthenticator`.
+
 ## 3.1.0 - 2016-05-13
 
 ### Added
