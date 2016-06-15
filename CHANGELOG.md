@@ -1,5 +1,10 @@
 # bedrock-passport ChangeLog
 
+## 3.1.2 - 2016-06-15
+
+### Changed
+- Move passport authentication after any static file middleware.
+
 ## 3.1.1 - 2016-05-19
 
 ### Fixed
@@ -12,36 +17,36 @@
 ### Added
 - Optionally disable logins for non-persistent users.
 
-## [3.0.5] - 2016-05-09
+## 3.0.5 - 2016-05-09
 
 ### Fixed
 - Ensure `bedrock-passport.authenticate` is emitted when using session authN.
 
-## [3.0.4] - 2016-04-28
+## 3.0.4 - 2016-04-28
 
-## [3.0.3] - 2016-04-26
+## 3.0.3 - 2016-04-26
 
-## [3.0.2] - 2016-04-15
+## 3.0.2 - 2016-04-15
 
 ### Changed
 - Update bedrock dependencies.
 
-## [3.0.1] - 2016-03-16
+## 3.0.1 - 2016-03-16
 
 ### Changed
 - Add public key lookup for HTTPSignature keyIds that are dids.
 
-## [3.0.0] - 2016-03-02
+## 3.0.0 - 2016-03-02
 
 ### Changed
 - Update package dependencies for npm v3 compatibility.
 
-## [2.0.1] - 2016-02-01
+## 2.0.1 - 2016-02-01
 
 ## Changed
 - Support non-persistent users in HttpSignatureStrategy.
 
-## [2.0.0] - 2016-01-31
+## 2.0.0 - 2016-01-31
 
 ### Changed
 - **BREAKING**: Modular redesign.
@@ -57,11 +62,11 @@
   not be counted.
 - Strategy for authenticating via DIDs.
 
-## [1.0.1] - 2015-05-07
+## 1.0.1 - 2015-05-07
 
-## [1.0.0] - 2015-04-08
+## 1.0.0 - 2015-04-08
 
-## [0.1.1] - 2015-02-23
+## 0.1.1 - 2015-02-23
 
 ### Added
 - Support for `bedrock-express` 0.2.x.
