@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2016 Digital Bazaar, Inc. All rights reserved.
  */
- /* globals describe, before, after, it, should, beforeEach, afterEach */
- /* jshint node: true */
+/* globals describe, before, after, it, should, beforeEach, afterEach */
+/* jshint node: true */
 'use strict';
 
 var async = require('async');
@@ -38,7 +38,6 @@ describe('bedrock-passport', function() {
           checkResults: ['authenticate', function(callback, results) {
             // Should return a barebones identity
             var identity = results.authenticate.identity;
-            console.log(identity);
             should.exist(identity);
             should.exist(identity['@context']);
             identity.id.should.equal(user.identity.id);
