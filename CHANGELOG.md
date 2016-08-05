@@ -1,5 +1,12 @@
 # bedrock-passport ChangeLog
 
+## 3.1.3 - 2016-08-05
+
+### Fixed
+- Fix uncaught error in HttpSignatureStrategy.
+- Fix mocha test suite.
+- Include domain information in error details.
+
 ## 3.1.2 - 2016-06-15
 
 ### Changed
