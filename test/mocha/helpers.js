@@ -49,6 +49,7 @@ api.createKeyPair = function(options) {
   var publicKey = options.publicKey;
   var privateKey = options.privateKey;
   var ownerId = null;
+  var keyId = options.keyId;
   if(userName === 'userUnknown') {
     ownerId = '';
   } else {
@@ -57,7 +58,7 @@ api.createKeyPair = function(options) {
   var newKeyPair = {
     publicKey: {
       '@context': 'https://w3id.org/identity/v1',
-      id: 'https://' + config.server.host + '/tests/keys/1',
+      id: 'https://' + config.server.host + '/keys/' + keyId,
       type: 'CryptographicKey',
       owner: ownerId,
       label: 'Signing Key 1',
@@ -67,7 +68,7 @@ api.createKeyPair = function(options) {
       type: 'CryptographicKey',
       owner: ownerId,
       label: 'Signing Key 1',
-      publicKey: 'https://' + config.server.host + '/tests/keys/1',
+      publicKey: 'https://' + config.server.host + '/keys/' + keyId,
       privateKeyPem: privateKey
     }
   };
