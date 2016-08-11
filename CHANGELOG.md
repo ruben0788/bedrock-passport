@@ -1,5 +1,10 @@
 # bedrock-passport ChangeLog
 
+## 3.1.4 - 2016-08-11
+
+### Fixed
+- Only authenticate active identities.
+
 ## 3.1.3 - 2016-08-05
 
 ### Fixed
