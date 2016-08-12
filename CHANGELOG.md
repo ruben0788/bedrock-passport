@@ -1,5 +1,10 @@
 # bedrock-passport ChangeLog
 
+## 3.1.5 - 2016-08-12
+
+### Changed
+- Add validation for dereferenced documents.
+
 ## 3.1.4 - 2016-08-11
 
 ### Fixed
