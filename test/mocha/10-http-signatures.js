@@ -21,7 +21,7 @@ var urlObj = {
   pathname: '/tests/bedrock-passport/http-signature-test'
 };
 
-describe.only('bedrock-passport', function() {
+describe('bedrock-passport', function() {
   describe('authenticated requests using http-signature', function() {
     describe('using dereference lookup', function() {
       it('dereference lookup completes successfully', function(done) {
