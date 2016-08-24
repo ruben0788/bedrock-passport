@@ -1,5 +1,10 @@
 # bedrock-passport ChangeLog
 
+## 3.1.6 - 2016-08-24
+
+### Fixed
+- Remove .only from test spec.
+
 ## 3.1.5 - 2016-08-12
 
 ### Changed
