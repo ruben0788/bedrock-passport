@@ -1,5 +1,7 @@
 # bedrock-passport
 
+![build status](http://ci.digitalbazaar.com/buildStatus/icon?job=bedrock-passport)
+
 A [bedrock][] module that adds website or REST API authentication to
 [bedrock][] via [passport][].
 
