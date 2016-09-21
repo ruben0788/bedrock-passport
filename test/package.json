@@ -1,9 +1,11 @@
 {
-  "name": "bedrock-passport",
+  "name": "bedrock-passport-test",
   "version": "3.1.7-0",
-  "description": "Bedrock passport module",
-  "main": "./lib",
-  "scripts": {},
+  "description": "Bedrock passport module test",
+  "main": "test",
+  "scripts": {
+    "test": "node --preserve-symlinks test.js test"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/digitalbazaar/bedrock-passport"
@@ -23,6 +25,19 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-passport",
   "dependencies": {
     "async": "^1.5.2",
+    "bedrock": "^1.0.0",
+    "bedrock-docs": "^2.0.2",
+    "bedrock-express": "^2.0.0",
+    "bedrock-identity": "^4.0.0",
+    "bedrock-key": "^3.0.0",
+    "bedrock-mongodb": "^3.0.0",
+    "bedrock-permission": "^2.3.2",
+    "bedrock-requirejs": "^2.0.3",
+    "bedrock-rest": "^2.0.1",
+    "bedrock-server": "^2.1.2",
+    "bedrock-test": "^1.0.0",
+    "bedrock-validation": "^2.2.0",
+    "bedrock-views": "^4.2.3",
     "credentials-io": "~0.2.0",
     "did-io": "^0.6.1",
     "http-signature": "^1.0.2",
@@ -30,14 +45,8 @@
     "jsonld-signatures": "^1.1.5",
     "lodash": "^4.0.0",
     "passport": "~0.2.1",
-    "request": "^2.75.0"
-  },
-  "peerDependencies": {
-    "bedrock": "^1.0.0",
-    "bedrock-express": "^2.0.0",
-    "bedrock-identity": "^4.0.0",
-    "bedrock-key": "^3.0.0",
-    "bedrock-mongodb": "^3.0.0"
+    "request": "^2.75.0",
+    "uuid": "^2.0.2"
   },
   "directories": {
     "lib": "./lib"
