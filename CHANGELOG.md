@@ -1,5 +1,10 @@
 # bedrock-passport ChangeLog
 
+## 3.1.7 - 2016-09-21
+
+### Changed
+- Restructure test framework for CI.
+
 ## 3.1.6 - 2016-08-24
 
 ### Fixed
