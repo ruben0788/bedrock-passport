@@ -1,5 +1,10 @@
 # bedrock-passport ChangeLog
 
+## 3.1.8 - 2016-11-10
+
+### Changed
+- Utilize `exists` API.
+
 ## 3.1.7 - 2016-09-21
 
 ### Changed
