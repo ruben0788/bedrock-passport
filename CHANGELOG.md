@@ -1,5 +1,10 @@
 # bedrock-passport ChangeLog
 
+## 3.1.9 - 2017-01-17
+
+### Changed
+- Improve error handling in `deserializeUser`.
+
 ## 3.1.8 - 2016-11-10
 
 ### Changed
