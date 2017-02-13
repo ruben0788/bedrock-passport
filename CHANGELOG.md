@@ -1,5 +1,12 @@
 # bedrock-passport ChangeLog
 
+## 3.2.0 - 2017-02-13
+
+## Added
+- Add `bedrock-did-client` dependency and config. Use of
+`bedrock.config.passport.strategies.did.didio.baseUrl` is deprecated.  Use
+`bedrock.config['did-client']['authorization-io'].didBaseUrl` instead.
+
 ## 3.1.9 - 2017-01-17
 
 ### Changed
