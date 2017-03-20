@@ -23,7 +23,7 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-passport",
   "dependencies": {
     "async": "^1.5.2",
-    "credentials-io": "~0.2.0",
+    "credentials-io": "digitalbazaar/credentials-io#graphArray",
     "did-io": "^0.6.1",
     "http-signature": "^1.0.2",
     "jsonld": "^0.4.2",
