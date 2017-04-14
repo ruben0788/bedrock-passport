@@ -1,5 +1,10 @@
 # bedrock-passport ChangeLog
 
+## 3.2.1 - 2017-04-14
+
+### Changed
+- Add validation of public key document in `HttpSignatureStrategy`.
+
 ## 3.2.0 - 2017-02-13
 
 ## Added
