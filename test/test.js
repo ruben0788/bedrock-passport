@@ -1,41 +1,44 @@
 /*
- * Copyright (c) 2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2016-2017 Digital Bazaar, Inc. All rights reserved.
  */
-var bedrock = require('bedrock');
-var brPassport = require('bedrock-passport');
-var mockData = require('./mocha/mock.data');
-var rest = require('bedrock-rest');
+const bedrock = require('bedrock');
+const brPassport = require('bedrock-passport');
+const mockData = require('./mocha/mock.data');
+const rest = require('bedrock-rest');
+const BedrockError = bedrock.util.BedrockError;
 
-bedrock.events.on('bedrock-express.configure.routes', function(app) {
+bedrock.events.on('bedrock-express.configure.routes', app => {
   app.get('/tests/bedrock-passport/http-signature-test',
     brPassport.ensureAuthenticated,
     rest.when.prefers.jsonld,
     rest.linkedDataHandler({
-      get: function(req, res, callback) {
+      get: (req, res, callback) => {
         callback(null, req.user);
       }
     })
   );
-  Object.keys(mockData.keys).forEach(function(k) {
-    app.get('/keys/' + k,
-      rest.when.prefers.jsonld,
-      rest.linkedDataHandler({
-        get: function(req, res, callback) {
-          callback(null, mockData.keys[k]);
-        }
-      })
-    );
-  });
-  Object.keys(mockData.owners).forEach(function(o) {
-    app.get('/tests/i/' + o,
-      rest.when.prefers.jsonld,
-      rest.linkedDataHandler({
-        get: function(req, res, callback) {
-          callback(null, mockData.owners[o]);
-        }
-      })
-    );
-  });
+  app.get('/keys/:key', rest.when.prefers.jsonld, rest.linkedDataHandler({
+    get: (req, res, callback) => {
+      if(!mockData.keys[req.params.key]) {
+        return callback(new BedrockError('Not Found.', 'NotFound', {
+          public: true,
+          httpStatusCode: 404
+        }));
+      }
+      callback(null, mockData.keys[req.params.key]);
+    }
+  }));
+  app.get('/tests/i/:owner', rest.when.prefers.jsonld, rest.linkedDataHandler({
+    get: (req, res, callback) => {
+      if(!mockData.owners[req.params.owner]) {
+        return callback(new BedrockError('Not Found.', 'NotFound', {
+          public: true,
+          httpStatusCode: 404
+        }));
+      }
+      callback(null, mockData.owners[req.params.owner]);
+    }
+  }));
 });
 
 require('bedrock-test');

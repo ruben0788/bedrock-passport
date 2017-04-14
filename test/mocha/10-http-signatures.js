@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2016-2017 Digital Bazaar, Inc. All rights reserved.
  */
-/* globals describe, before, after, it, should, beforeEach, afterEach */
-/* jshint node: true */
+/* globals should */
 'use strict';
 
 var async = require('async');
@@ -159,6 +158,8 @@ describe('bedrock-passport', function() {
           }]
         }, done);
       });
+      // TODO:
+      it('Fails if public key document is invalid.');
     });
   });
 });
