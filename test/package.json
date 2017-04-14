@@ -4,7 +4,8 @@
   "description": "Bedrock passport module test",
   "main": "test",
   "scripts": {
-    "test": "node --preserve-symlinks test.js test"
+    "test": "node --preserve-symlinks test.js test",
+    "ci-test": "node --preserve-symlinks test.js test --mocha-reporter=tap"
   },
   "repository": {
     "type": "git",
