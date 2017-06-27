@@ -1,5 +1,10 @@
 # bedrock-passport ChangeLog
 
+## 3.3.0 - 2017-06-27
+
+### Changed
+- Upgrade `bedrock-key` peer dependency from 3.x to 4.x.
+
 ## 3.2.1 - 2017-04-14
 
 ### Changed
