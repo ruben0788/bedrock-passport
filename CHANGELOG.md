@@ -1,5 +1,11 @@
 # bedrock-passport ChangeLog
 
+## 3.4.0 - 2017-09-04
+
+### Added
+- Allow full `origin` to be used for `domain` when
+  performing DID-based authentication.
+
 ## 3.3.0 - 2017-06-27
 
 ### Changed
