@@ -1,5 +1,10 @@
 # bedrock-passport ChangeLog
 
+## 3.4.1 - 2017-09-04
+
+### Fixed
+- Support node 6.x (no WHATWG URL parser for origin).
+
 ## 3.4.0 - 2017-09-04
 
 ### Added
