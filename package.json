@@ -1,6 +1,6 @@
 {
   "name": "bedrock-passport",
-  "version": "3.4.2",
+  "version": "3.4.3-0",
   "description": "Bedrock passport module",
   "main": "./lib",
   "scripts": {},
