@@ -1,25 +1,22 @@
-/*
+/*!
  * Copyright (c) 2015-2018 Digital Bazaar, Inc. All rights reserved.
  */
-/* jshint node: true */
-
 'use strict';
 
-var helpers = require('./helpers');
-var config = require('bedrock').config;
-var uuid = require('uuid').v4;
+const helpers = require('./helpers');
+const config = require('bedrock').config;
 
-var data = {};
+const data = {};
 module.exports = data;
 
-var identities = {};
+const identities = {};
 data.identities = identities;
 data.keys = {};
 data.owners = {};
 
 // admin user with a valid 2048 bit RSA keypair and issuer permissions
-var userName = 'alpha';
-var keyId = '31e76c9d-0cb9-4d0a-9154-584a58fc4bab';
+let userName = 'alpha';
+let keyId = '31e76c9d-0cb9-4d0a-9154-584a58fc4bab';
 identities[userName] = {};
 identities[userName].identity = helpers.createIdentity(userName);
 identities[userName].identity.sysResourceRole.push({

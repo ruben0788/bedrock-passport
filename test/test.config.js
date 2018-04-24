@@ -1,12 +1,11 @@
 /*
  * Copyright (c) 2016-2018 Digital Bazaar, Inc. All rights reserved.
  */
-/* jshint node: true */
 'use strict';
 
-var bedrock = require('bedrock');
-var config = bedrock.config;
-var path = require('path');
+const bedrock = require('bedrock');
+const config = bedrock.config;
+const path = require('path');
 
 config.mocha.tests.push(path.join(__dirname, 'mocha'));
 

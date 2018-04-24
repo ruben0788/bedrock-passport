@@ -1,42 +1,39 @@
-/*
+/*!
  * Copyright (c) 2016-2018 Digital Bazaar, Inc. All rights reserved.
  */
-/* globals should */
 'use strict';
 
-var async = require('async');
-var bedrock = require('bedrock');
-var config = bedrock.config;
-var helpers = require('./helpers');
-var mockData = require('./mock.data');
-var url = require('url');
-var util = bedrock.util;
-var request = require('request');
+const async = require('async');
+const bedrock = require('bedrock');
+const config = bedrock.config;
+const helpers = require('./helpers');
+const mockData = require('./mock.data');
+const url = require('url');
+const util = bedrock.util;
+let request = require('request');
 request = request.defaults({json: true, strictSSL: false});
 
-var urlObj = {
+const urlObj = {
   protocol: 'https',
   host: config.server.host,
   pathname: '/tests/bedrock-passport/http-signature-test'
 };
 
-describe('bedrock-passport', function() {
-  describe('authenticated requests using http-signature', function() {
-    describe('using dereference lookup', function() {
-      it('dereference lookup completes successfully', function(done) {
-        var user = mockData.identities.alpha;
+describe('bedrock-passport', () => {
+  describe('authenticated requests using http-signature', () => {
+    describe('using dereference lookup', () => {
+      it('dereference lookup completes successfully', done => {
+        const user = mockData.identities.alpha;
         async.auto({
-          authenticate: function(callback) {
-            var clonedUrlObj = util.clone(urlObj);
+          authenticate: callback => {
+            const clonedUrlObj = util.clone(urlObj);
             request.get(helpers.createHttpSignatureRequest(
               url.format(clonedUrlObj), user),
-              function(err, res) {
-                callback(err, res.body);
-              });
+            (err, res) => callback(err, res.body));
           },
-          checkResults: ['authenticate', function(callback, results) {
+          checkResults: ['authenticate', (callback, results) => {
             // Should return a barebones identity
-            var identity = results.authenticate.identity;
+            const identity = results.authenticate.identity;
             should.exist(identity);
             should.exist(identity['@context']);
             identity.id.should.equal(user.identity.id);
@@ -47,20 +44,18 @@ describe('bedrock-passport', function() {
       });
       // beta signs the request with a private key that does not match the
       // published public key
-      it('dereference lookup fails', function(done) {
-        var user = mockData.identities.beta;
+      it('dereference lookup fails', done => {
+        const user = mockData.identities.beta;
         async.auto({
-          authenticate: function(callback) {
-            var clonedUrlObj = util.clone(urlObj);
+          authenticate: callback => {
+            const clonedUrlObj = util.clone(urlObj);
             request.get(helpers.createHttpSignatureRequest(
               url.format(clonedUrlObj), user),
-              function(err, res) {
-                callback(err, res);
-              });
+            (err, res) => callback(err, res));
           },
-          checkResults: ['authenticate', function(callback, results) {
+          checkResults: ['authenticate', (callback, results) => {
             // Should return a barebones identity
-            var res = results.authenticate;
+            const res = results.authenticate;
             res.statusCode.should.equal(400);
             should.exist(res.body);
             should.exist(res.body.type);
@@ -70,20 +65,18 @@ describe('bedrock-passport', function() {
         }, done);
       });
       // gamma has no published public key document
-      it('should fail if key document URL is unavailable', function(done) {
-        var user = mockData.identities.gamma;
+      it('should fail if key document URL is unavailable', done => {
+        const user = mockData.identities.gamma;
         async.auto({
-          authenticate: function(callback) {
-            var clonedUrlObj = util.clone(urlObj);
+          authenticate: callback => {
+            const clonedUrlObj = util.clone(urlObj);
             request.get(helpers.createHttpSignatureRequest(
               url.format(clonedUrlObj), user),
-              function(err, res) {
-                callback(err, res);
-              });
+            (err, res) => callback(err, res));
           },
-          checkResults: ['authenticate', function(callback, results) {
+          checkResults: ['authenticate', (callback, results) => {
             // Should return a barebones identity
-            var res = results.authenticate;
+            const res = results.authenticate;
             res.statusCode.should.equal(400);
             should.exist(res.body);
             should.exist(res.body.type);
@@ -98,20 +91,18 @@ describe('bedrock-passport', function() {
         }, done);
       });
       // delta has no published owner document
-      it('should fail if owner URL is unavailable', function(done) {
-        var user = mockData.identities.delta;
+      it('should fail if owner URL is unavailable', done => {
+        const user = mockData.identities.delta;
         async.auto({
-          authenticate: function(callback) {
-            var clonedUrlObj = util.clone(urlObj);
+          authenticate: callback => {
+            const clonedUrlObj = util.clone(urlObj);
             request.get(helpers.createHttpSignatureRequest(
               url.format(clonedUrlObj), user),
-              function(err, res) {
-                callback(err, res);
-              });
+            (err, res) => callback(err, res));
           },
-          checkResults: ['authenticate', function(callback, results) {
+          checkResults: ['authenticate', (callback, results) => {
             // Should return a barebones identity
-            var res = results.authenticate;
+            const res = results.authenticate;
             res.statusCode.should.equal(400);
             should.exist(res.body);
             should.exist(res.body.type);
@@ -127,20 +118,18 @@ describe('bedrock-passport', function() {
         }, done);
       });
       // epsilon owner doc references alpha owner public key doc
-      it('fails if owner doc references wrong public key', function(done) {
-        var user = mockData.identities.epsilon;
+      it('fails if owner doc references wrong public key', done => {
+        const user = mockData.identities.epsilon;
         async.auto({
-          authenticate: function(callback) {
-            var clonedUrlObj = util.clone(urlObj);
+          authenticate: callback => {
+            const clonedUrlObj = util.clone(urlObj);
             request.get(helpers.createHttpSignatureRequest(
               url.format(clonedUrlObj), user),
-              function(err, res) {
-                callback(err, res);
-              });
+            (err, res) => callback(err, res));
           },
-          checkResults: ['authenticate', function(callback, results) {
+          checkResults: ['authenticate', (callback, results) => {
             // Should return a barebones identity
-            var res = results.authenticate;
+            const res = results.authenticate;
             res.statusCode.should.equal(400);
             should.exist(res.body);
             should.exist(res.body.type);

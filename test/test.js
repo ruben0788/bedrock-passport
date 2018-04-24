@@ -1,11 +1,13 @@
 /*
  * Copyright (c) 2016-2018 Digital Bazaar, Inc. All rights reserved.
  */
+'use strict';
+
 const bedrock = require('bedrock');
 const brPassport = require('bedrock-passport');
 const mockData = require('./mocha/mock.data');
 const rest = require('bedrock-rest');
-const BedrockError = bedrock.util.BedrockError;
+const {BedrockError} = bedrock.util;
 
 bedrock.events.on('bedrock-express.configure.routes', app => {
   app.get('/tests/bedrock-passport/http-signature-test',
