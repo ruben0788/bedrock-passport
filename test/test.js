@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2017 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2016-2018 Digital Bazaar, Inc. All rights reserved.
  */
 const bedrock = require('bedrock');
 const brPassport = require('bedrock-passport');
