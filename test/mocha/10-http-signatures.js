@@ -31,7 +31,7 @@ describe('bedrock-passport', () => {
               url.format(clonedUrlObj), user),
             (err, res) => callback(err, res.body));
           },
-          checkResults: ['authenticate', (callback, results) => {
+          checkResults: ['authenticate', (results, callback) => {
             // Should return a barebones identity
             const identity = results.authenticate.identity;
             should.exist(identity);
@@ -53,7 +53,7 @@ describe('bedrock-passport', () => {
               url.format(clonedUrlObj), user),
             (err, res) => callback(err, res));
           },
-          checkResults: ['authenticate', (callback, results) => {
+          checkResults: ['authenticate', (results, callback) => {
             // Should return a barebones identity
             const res = results.authenticate;
             res.statusCode.should.equal(400);
@@ -74,7 +74,7 @@ describe('bedrock-passport', () => {
               url.format(clonedUrlObj), user),
             (err, res) => callback(err, res));
           },
-          checkResults: ['authenticate', (callback, results) => {
+          checkResults: ['authenticate', (results, callback) => {
             // Should return a barebones identity
             const res = results.authenticate;
             res.statusCode.should.equal(400);
@@ -100,7 +100,7 @@ describe('bedrock-passport', () => {
               url.format(clonedUrlObj), user),
             (err, res) => callback(err, res));
           },
-          checkResults: ['authenticate', (callback, results) => {
+          checkResults: ['authenticate', (results, callback) => {
             // Should return a barebones identity
             const res = results.authenticate;
             res.statusCode.should.equal(400);
@@ -127,7 +127,7 @@ describe('bedrock-passport', () => {
               url.format(clonedUrlObj), user),
             (err, res) => callback(err, res));
           },
-          checkResults: ['authenticate', (callback, results) => {
+          checkResults: ['authenticate', (results, callback) => {
             // Should return a barebones identity
             const res = results.authenticate;
             res.statusCode.should.equal(400);

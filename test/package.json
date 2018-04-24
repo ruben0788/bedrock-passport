@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/digitalbazaar/bedrock-passport",
   "dependencies": {
-    "async": "^1.5.2",
+    "async": "^2.6.0",
     "bedrock": "^1.0.0",
     "bedrock-did-client": "^1.0.0",
     "bedrock-docs": "^2.0.2",
