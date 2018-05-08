@@ -4,7 +4,26 @@
 'use strict';
 
 const helpers = require('./helpers');
-const config = require('bedrock').config;
+const {config} = require('bedrock');
+const {constants} = config;
+const fs = require('fs');
+const path = require('path');
+
+constants.SECURITY_CONTEXT_V1_URL = 'https://w3id.org/security/v1';
+constants.CONTEXTS[constants.SECURITY_CONTEXT_V1_URL] = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '../contexts/security-v1.jsonld'),
+    {encoding: 'utf8'}));
+constants.SECURITY_CONTEXT_V2_URL = 'https://w3id.org/security/v2';
+constants.CONTEXTS[constants.SECURITY_CONTEXT_V2_URL] = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '../contexts/security-v2.jsonld'),
+    {encoding: 'utf8'}));
+constants.IDENTITY_CONTEXT_V1_URL = 'https://w3id.org/identity/v1';
+constants.CONTEXTS[constants.IDENTITY_CONTEXT_V1_URL] = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '../contexts/identity-v1.jsonld'),
+    {encoding: 'utf8'}));
 
 const data = {};
 module.exports = data;
@@ -14,7 +33,7 @@ data.identities = identities;
 data.keys = {};
 data.owners = {};
 
-// admin user with a valid 2048 bit RSA keypair and issuer permissions
+// user with a valid 2048 bit RSA keypair
 let userName = 'alpha';
 let keyId = '31e76c9d-0cb9-4d0a-9154-584a58fc4bab';
 identities[userName] = {};
@@ -244,6 +263,7 @@ data.keys[keyId] = createPublicKeyDoc({
   publicKeyPem: identities[userName].keys.publicKey.publicKeyPem,
   userId: userName
 });
+
 // epsilon owner doc has public key ID for alpha owner
 userName = 'epsilon';
 keyId = '9a1ff4d2-010a-4152-9bf1-e8618f1c8e82';
@@ -305,9 +325,39 @@ data.owners[userName] = createOwnerDoc({
   userId: userName
 });
 
+// zeta has an ed25519 keypair
+userName = 'zeta';
+keyId = 'd6d09ca6-253d-4db9-b0cd-05d535fc631a';
+identities[userName] = {};
+identities[userName].identity = helpers.createIdentity(userName);
+identities[userName].identity.sysResourceRole.push({
+  sysRole: 'credential.user',
+  generateResource: 'id'
+});
+identities[userName].keys = helpers.createKeyPair({
+  userName: userName,
+  userId: identities[userName].identity.id,
+  keyId: keyId,
+  publicKeyBase58: 'GycSSui454dpYRKiFdsQ5uaE8Gy3ac6dSMPcAoQsk8yq',
+  privateKeyBase58:
+    '3Mmk4UzTRJTEtxaKk61LxtgUxAa2Dg36jF6VogPtRiKvfpsQWKPCLesKSV182RMmvM' +
+    'JKk6QErH3wgdHp8itkSSiF'
+});
+data.keys[keyId] = createPublicKeyDoc({
+  keyId,
+  publicKeyBase58: identities[userName].keys.publicKey.publicKeyBase58,
+  userId: userName
+});
+data.owners[userName] = createOwnerDoc({keyId, userId: userName});
+
 function createOwnerDoc(options) {
   return {
-    '@context': 'https://w3id.org/identity/v1',
+
+    // FIXME: proper context? is `CryptographicKey` appropriate here even
+    // if the key document includes a more specific type as well?  see key
+    // doc below
+
+    '@context': constants.IDENTITY_CONTEXT_V1_URL,
     'id': 'https://' + config.server.host + '/tests/i/' + options.userId,
     'type': 'Identity',
     'publicKey': {
@@ -319,14 +369,21 @@ function createOwnerDoc(options) {
   };
 }
 
-function createPublicKeyDoc(options) {
-  return {
-    '@context': 'https://w3id.org/identity/v1',
-    'type': 'CryptographicKey',
-    'owner': 'https://' + config.server.host + '/tests/i/' + options.userId,
-    'label': 'Access Key 1',
-    'publicKeyPem': options.publicKeyPem,
-    'id': 'https://' + config.server.host + '/keys/' + options.keyId,
-    'sysStatus': 'active'
+function createPublicKeyDoc({keyId, publicKeyPem, publicKeyBase58, userId}) {
+  const doc = {
+    '@context': constants.SECURITY_CONTEXT_V2_URL,
+    owner: `https://${config.server.host}/tests/i/${userId}`,
+    label: 'Access Key 1',
+    id: `https://${config.server.host}/keys/${keyId}`,
+    sysStatus: 'active'
   };
+  if(publicKeyPem) {
+    doc.type = ['CryptographicKey', 'RsaVerificationKey2018'];
+    doc.publicKeyPem = publicKeyPem;
+  }
+  if(publicKeyBase58) {
+    doc.type = ['CryptographicKey', 'Ed25519VerificationKey2018'];
+    doc.publicKeyBase58 = publicKeyBase58;
+  }
+  return doc;
 }

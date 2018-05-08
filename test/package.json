@@ -26,6 +26,7 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-passport",
   "dependencies": {
     "async": "^2.6.0",
+    "axios": "^0.18.0",
     "bedrock": "^1.0.0",
     "bedrock-did-client": "^1.0.0",
     "bedrock-docs": "^2.0.2",
@@ -39,15 +40,6 @@
     "bedrock-server": "^2.1.2",
     "bedrock-test": "^2.0.0",
     "bedrock-validation": "^2.2.0",
-    "bedrock-views": "^5.4.0",
-    "credentials-io": "~0.2.0",
-    "did-io": "^0.6.1",
-    "http-signature": "^1.0.2",
-    "jsonld": "^0.4.2",
-    "jsonld-signatures": "^1.2.1",
-    "lodash": "^4.0.0",
-    "passport": "~0.2.1",
-    "request": "^2.75.0",
-    "uuid": "^3.2.1"
+    "bedrock-views": "^5.4.0"
   }
 }
