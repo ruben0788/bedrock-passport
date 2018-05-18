@@ -32,7 +32,12 @@ describe('bedrock-passport', () => {
         };
         await helpers.createHttpSignatureRequest(
           {algorithm: 'ed25519', identity, requestOptions});
-        const res = await axios(requestOptions);
+        let res;
+        try {
+          res = await axios(requestOptions);
+        } catch(err) {
+          should.not.exist(err);
+        }
         res.status.should.equal(200);
         // test endpoint returns an identity document
         should.exist(res.data.identity.id);
@@ -104,7 +109,7 @@ describe('bedrock-passport', () => {
           data.type.should.equal('PermissionDenied');
           should.exist(data.cause);
           should.exist(data.cause.type);
-          data.cause.type.should.equal('HttpSignature.VerifyFailure');
+          data.cause.type.should.equal('NotFoundError');
           should.exist(data.cause.message);
           data.cause.message.should.equal('Public key URL unavailable.');
         }
@@ -133,9 +138,11 @@ describe('bedrock-passport', () => {
           data.type.should.equal('PermissionDenied');
           should.exist(data.cause);
           should.exist(data.cause.type);
-          data.cause.type.should.equal('HttpSignature.VerifyFailure');
+          data.cause.type.should.equal('DataError');
           should.exist(data.cause.message);
-          data.cause.message.should.equal('Public key verification failed.');
+          data.cause.message.should.equal(
+            'Public key verification failed: Error: The public key is not ' +
+            'owned by its declared owner.');
         }
         should.not.exist(res);
       });
@@ -163,11 +170,11 @@ describe('bedrock-passport', () => {
           data.type.should.equal('PermissionDenied');
           should.exist(data.cause);
           should.exist(data.cause.type);
-          data.cause.type.should.equal('HttpSignature.VerifyFailure');
+          data.cause.type.should.equal('DataError');
           should.exist(data.cause.message);
-          data.cause.message.should.equal('Public key verification failed.');
-          data.cause.details.error.should
-            .equal('Error: The public key is not owned by its declared owner.');
+          data.cause.message.should.equal(
+            'Public key verification failed: Error: The public key is not ' +
+            'owned by its declared owner.');
         }
         should.not.exist(res);
       });
