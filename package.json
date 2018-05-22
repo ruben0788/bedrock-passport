@@ -25,7 +25,7 @@
     "async": "^2.6.0",
     "credentials-io": "~0.2.0",
     "did-io": "^0.6.1",
-    "http-signature-middleware": "digitalbazaar/http-signature-middleware#implementation",
+    "http-signature-middleware": "digitalbazaar/http-signature-middleware#master",
     "jsonld": "^1.0.1",
     "jsonld-signatures": "^2.3.0",
     "jsprim": "^2.0.0",
