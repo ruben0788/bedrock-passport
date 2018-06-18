@@ -1,5 +1,7 @@
 # bedrock-passport ChangeLog
 
+## 4.0.0 - 2018-06-18
+
 ### Added
 - Support promises for `authenticate` and `authenticateAll`.
 - Include `strategies` and `identities` in `user` (and therefore `req.user`).
