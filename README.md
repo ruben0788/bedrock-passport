@@ -16,11 +16,11 @@ npm install bedrock-passport
 ```
 
 ```js
-var brPassport = require('bedrock-passport');
+const brPassport = require('bedrock-passport');
 
 app.server.post('/resources/:resourceId',
   brPassport.ensureAuthenticated,
-  function(req, res, next) {
+  (req, res, next) => {
     // resourceId available with req.params.resourceId
     // user identity available with req.user.identity
     res.sendStatus(204);
@@ -51,23 +51,7 @@ clients, and clients that you do not want to provide a password for.
 
 ## API
 
-### checkAuthentication(req, res, callback(err, info))
-
-Check authentication of a request. If more than one authentication method is
-present, all of the associated identities must match.
-
-### optionallyAuthenticated(req, res, next)
-
-Process a request has been optionally authenticated via `checkAuthentication`.
-Code using this call can check if the request is authenticated by testing if
-`req.user` and `req.user.identity` are set.
-
-### ensureAuthenticated(req, res, next)
-
-Ensure a request has been authenticated via `optionallyAuthenticated`. Redirect
-if not and it looks like a browser GET request, otherwise set a 400 error.
-
-### authenticate(strategy, options, callback(err, user, info))
+### authenticate({strategy, req, res, options = {}}, callback(err, {user}))
 
 Attempt to authenticate a user using the specified strategy. If authentication
 is successful, a `bedrock-passport.authenticate` event is emitted with an
@@ -75,14 +59,41 @@ object with this format:
 
 ```js
 {
-  strategy: strategy,
-  options: options,
-  user: user,
-  info: info
+  strategy,
+  options,
+  user
 }
 ```
 
-Once all event handlers have run, `callback` is called.
+Once all event handlers have run, `callback` is called (or the returned
+Promise resolves for Promise users).
+
+### authenticateAll({req, res, options = {}}, callback(err, {user}))
+
+Attempt to authenticate a user using all configured strategies. For every
+authentication method, `authenticate` will be called. If more than
+one authentication method is configured to run automatically, all of the
+associated accounts must match. Any identities detected may be different and
+will be given in `user.identities`. The `actor` (all combined capabilities
+detected from all authenticated identities) is available on `user.actor`. This
+function also returns a Promise so `callback` is not necessary when using
+promises.
+
+### createMiddleware({strategy, options})
+
+Creates express middleware that calls `authenticate` using the given strategy.
+
+### optionallyAuthenticated(req, res, next)
+
+Express middleware that processes a request has been optionally authenticated
+via `authenticateAll`. Code using this call can check if the request is
+authenticated by testing if `req.user` and `req.user.actor` are set.
+
+### ensureAuthenticated(req, res, next)
+
+Express middleware that ensures a request has been authenticated via
+`optionallyAuthenticated`. Redirect if not and it looks like a browser GET
+request, otherwise set a 400 error.
 
 [bedrock]: https://github.com/digitalbazaar/bedrock
 [passport]: https://github.com/jaredhanson/passport
