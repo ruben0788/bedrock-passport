@@ -1,5 +1,7 @@
 # bedrock-passport ChangeLog
 
+## 4.0.1 - 2018-06-25
+
 ### Fixed
 - Use `brIdentity.getCapabilities` to produce identity-based
   actor.
