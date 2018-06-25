@@ -1,5 +1,7 @@
 # bedrock-passport ChangeLog
 
+## 4.0.2 - 2018-06-25
+
 ### Fixed
 - Fix bugs related to calling `passport.authenticate`.
 
