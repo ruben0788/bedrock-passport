@@ -1,5 +1,11 @@
 # bedrock-passport ChangeLog
 
+### Changed
+- Deprecate `createAuthenticator`, use `createMiddleware` instead.
+
+### Added
+- Add support for `default` strategy via `createMiddleware`.
+
 ## 4.0.3 - 2018-07-26
 
 ### Fixed
