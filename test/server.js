@@ -4,12 +4,49 @@ const rest = require('bedrock-rest');
 const mockData = require('./mocha/mock.data');
 const {BedrockError} = bedrock.util;
 
+// TODO: probably want a middleware that checks the ocaps here...
+// ... skipping the invocation check instead of this thing, the rest is
+// automatic via http signatures...
+const requireOcap = brPassport.createMiddleware({
+  strategy: 'default',
+  required: true,
+  optionsMap: {
+    'http-signature-strategy': {
+      // TODO: this is for a failure case
+      //keyType: 'CryptographicKey'
+      ocapToResourceRoles({ocap}) {
+        const resourceRoles = [];
+        if(ocap.id === 'foo') {
+          resourceRoles.push({
+            sysRole: 'role-name',
+            resource: 'resourceId'
+          });
+        }
+        console.log('mapped to', resourceRoles);
+        return resourceRoles;
+      }
+    }
+  }
+});
+
 bedrock.events.on('bedrock-express.configure.routes', app => {
   app.get('/tests/bedrock-passport/http-signature-test',
     brPassport.ensureAuthenticated,
     rest.when.prefers.jsonld,
     rest.linkedDataHandler({
       get: (req, res, callback) => {
+        callback(null, req.user);
+      }
+    })
+  );
+  app.get('/tests/bedrock-passport/http-signature-ocap-test',
+    requireOcap,
+    rest.when.prefers.jsonld,
+    rest.linkedDataHandler({
+      get: (req, res, callback) => {
+        // TODO: check `req.user.actor` for resourceRole with
+        // `role-name` and `resourceId`
+        console.log('req.user.actor', req.user.actor.sysResourceRole);
         callback(null, req.user);
       }
     })

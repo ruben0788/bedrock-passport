@@ -4,6 +4,7 @@
 'use strict';
 
 const axios = require('axios');
+const base64url = require('base64url');
 const bedrock = require('bedrock');
 const config = bedrock.config;
 const helpers = require('./helpers');
@@ -18,6 +19,8 @@ const urlObj = {
   host: config.server.host,
   pathname: '/tests/bedrock-passport/http-signature-test'
 };
+
+const ocapPath = '/tests/bedrock-passport/http-signature-ocap-test';
 
 describe('bedrock-passport', () => {
   describe('authenticated requests using http-signature', () => {
@@ -54,6 +57,32 @@ describe('bedrock-passport', () => {
         await helpers.createHttpSignatureRequest(
           {algorithm: 'rsa-sha256', identity, requestOptions});
         const res = await axios(requestOptions);
+        res.status.should.equal(200);
+        // test endpoint returns an identity document
+        should.exist(res.data.identity.id);
+        res.data.identity.id.should.equal(identity.identity.id);
+      });
+      it.only('ocap request succeeds with ed25519 key', async () => {
+        const identity = mockData.identities.zeta;
+        const clonedUrlObj = util.clone(urlObj);
+        clonedUrlObj.pathname = ocapPath;
+        const ocap = JSON.stringify({id: 'foo'});
+        const requestOptions = {
+          headers: {
+            'object-capability': `type=ocapld; value=${base64url(ocap)}`
+          },
+          method: 'get',
+          url: url.format(clonedUrlObj)
+        };
+        await helpers.createHttpSignatureRequest(
+          {algorithm: 'ed25519', identity, requestOptions,
+            additionalIncludeHeaders: ['object-capability']});
+        let res;
+        try {
+          res = await axios(requestOptions);
+        } catch(err) {
+          should.not.exist(err);
+        }
         res.status.should.equal(200);
         // test endpoint returns an identity document
         should.exist(res.data.identity.id);
