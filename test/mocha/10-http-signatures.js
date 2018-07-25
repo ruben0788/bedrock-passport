@@ -62,7 +62,7 @@ describe('bedrock-passport', () => {
         should.exist(res.data.identity.id);
         res.data.identity.id.should.equal(identity.identity.id);
       });
-      it.only('ocap request succeeds with ed25519 key', async () => {
+      it('ocap request succeeds with ed25519 key', async () => {
         const identity = mockData.identities.zeta;
         const clonedUrlObj = util.clone(urlObj);
         clonedUrlObj.pathname = ocapPath;
@@ -84,9 +84,18 @@ describe('bedrock-passport', () => {
           should.not.exist(err);
         }
         res.status.should.equal(200);
-        // test endpoint returns an identity document
         should.exist(res.data.identity.id);
         res.data.identity.id.should.equal(identity.identity.id);
+        should.exist(res.data.actor);
+        should.exist(res.data.actor.id);
+        res.data.actor.id.should.equal(identity.identity.id);
+        should.exist(res.data.actor.sysResourceRole);
+        res.data.actor.sysResourceRole.length.should.equal(1);
+        const resourceRole = res.data.actor.sysResourceRole[0];
+        should.exist(resourceRole.sysRole);
+        should.exist(resourceRole.resource);
+        resourceRole.sysRole.should.equal('roleName');
+        resourceRole.resource.should.equal('urn:id');
       });
 
       // beta signs the request with a private key that does not match the

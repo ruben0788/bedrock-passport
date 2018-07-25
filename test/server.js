@@ -12,17 +12,17 @@ const requireOcap = brPassport.createMiddleware({
   required: true,
   optionsMap: {
     'http-signature-strategy': {
-      // TODO: this is for a failure case
+      // TODO: setting this `keyType` would be for a failure case as
+      // the keys do not use this old type
       //keyType: 'CryptographicKey'
       ocapToResourceRoles({ocap}) {
         const resourceRoles = [];
         if(ocap.id === 'foo') {
           resourceRoles.push({
-            sysRole: 'role-name',
-            resource: 'resourceId'
+            sysRole: 'roleName',
+            resource: 'urn:id'
           });
         }
-        console.log('mapped to', resourceRoles);
         return resourceRoles;
       }
     }
@@ -44,9 +44,6 @@ bedrock.events.on('bedrock-express.configure.routes', app => {
     rest.when.prefers.jsonld,
     rest.linkedDataHandler({
       get: (req, res, callback) => {
-        // TODO: check `req.user.actor` for resourceRole with
-        // `role-name` and `resourceId`
-        console.log('req.user.actor', req.user.actor.sysResourceRole);
         callback(null, req.user);
       }
     })

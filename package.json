@@ -24,7 +24,7 @@
   "dependencies": {
     "credentials-io": "~0.2.0",
     "did-io": "^0.6.1",
-    "http-signature-middleware": "^2.0.0",
+    "http-signature-middleware": "digitalbazaar/http-signature-middleware#ocap-support",
     "jsonld": "^1.0.1",
     "jsonld-signatures": "^2.3.0",
     "passport": "~0.2.1"
