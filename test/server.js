@@ -4,9 +4,6 @@ const rest = require('bedrock-rest');
 const mockData = require('./mocha/mock.data');
 const {BedrockError} = bedrock.util;
 
-// TODO: probably want a middleware that checks the ocaps here...
-// ... skipping the invocation check instead of this thing, the rest is
-// automatic via http signatures...
 const requireOcap = brPassport.createMiddleware({
   strategy: 'default',
   required: true,
