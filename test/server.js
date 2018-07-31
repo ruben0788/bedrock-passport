@@ -12,12 +12,12 @@ const requireOcap = brPassport.createMiddleware({
       // TODO: setting this `keyType` would be for a failure case as
       // the keys do not use this old type
       //keyType: 'CryptographicKey'
-      ocapToResourceRoles({ocap}) {
+      ocapToResourceRoles({capabilityInvocation}) {
         const resourceRoles = [];
-        if(ocap.id === 'foo') {
+        if(capabilityInvocation.action === 'foo') {
           resourceRoles.push({
             sysRole: 'roleName',
-            resource: 'urn:id'
+            resource: capabilityInvocation.capability.invocationTarget
           });
         }
         return resourceRoles;

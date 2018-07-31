@@ -66,10 +66,17 @@ describe('bedrock-passport', () => {
         const identity = mockData.identities.zeta;
         const clonedUrlObj = util.clone(urlObj);
         clonedUrlObj.pathname = ocapPath;
-        const ocap = JSON.stringify({id: 'foo'});
+        const invocationTarget = 'urn:uuid:5678-5678-5678-5678';
+        const ocap = JSON.stringify({
+          id: 'urn:uuid:1234-1234-1234-1234',
+          invocationTarget
+        });
+        const action = 'foo';
         const requestOptions = {
           headers: {
-            'object-capability': `type=ocapld; value=${base64url(ocap)}`
+            'object-capability':
+              `type=ocapld; value=${base64url(ocap)}; ` +
+              `action=${base64url(action)}`
           },
           method: 'get',
           url: url.format(clonedUrlObj)
@@ -95,7 +102,7 @@ describe('bedrock-passport', () => {
         should.exist(resourceRole.sysRole);
         should.exist(resourceRole.resource);
         resourceRole.sysRole.should.equal('roleName');
-        resourceRole.resource.should.equal('urn:id');
+        resourceRole.resource.should.equal(invocationTarget);
       });
 
       // beta signs the request with a private key that does not match the
