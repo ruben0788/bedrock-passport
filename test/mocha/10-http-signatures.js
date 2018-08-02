@@ -67,10 +67,17 @@ describe('bedrock-passport', () => {
         const clonedUrlObj = util.clone(urlObj);
         clonedUrlObj.pathname = ocapPath;
         const invocationTarget = 'urn:uuid:5678-5678-5678-5678';
-        const ocap = JSON.stringify({
+        let ocap = {
+          '@context': [
+            'https://w3id.org/security/v2', {
+              invocationTarget: {'@id': 'sec:invocationTarget', '@type': '@id'}
+            }
+          ],
           id: 'urn:uuid:1234-1234-1234-1234',
           invocationTarget
-        });
+        };
+        ocap = await helpers.delegateOcap({ocap, identity});
+        ocap = JSON.stringify(ocap);
         const action = 'foo';
         const requestOptions = {
           headers: {

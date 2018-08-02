@@ -9,6 +9,7 @@ const config = require('bedrock').config;
 const database = require('bedrock-mongodb');
 const httpSignatureHeader = require('http-signature-header');
 const jsprim = require('jsprim');
+const jsigs = require('jsonld-signatures');
 const signatureAlgorithms = require('signature-algorithms');
 const {promisify} = require('util');
 
@@ -45,6 +46,18 @@ api.createHttpSignatureRequest = async (
   authzHeaderOptions.signature = await signatureAlgorithms.sign(cryptoOptions);
   requestOptions.headers.Authorization = httpSignatureHeader.createAuthzHeader(
     authzHeaderOptions);
+};
+
+api.delegateOcap = async ({ocap, identity}) => {
+  return jsigs.sign(ocap, {
+    algorithm: 'Ed25519Signature2018',
+    creator: identity.keys.publicKey.id,
+    privateKeyBase58: identity.keys.privateKey.privateKeyBase58,
+    proof: {
+      '@context': 'https://w3id.org/security/v2',
+      proofPurpose: 'capabilityDelegation'
+    }
+  });
 };
 
 api.createIdentity = userName => {
