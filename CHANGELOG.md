@@ -1,5 +1,10 @@
 # bedrock-passport ChangeLog
 
+## 4.0.4 - 2018-09-18
+
+### Fixed
+- Add missing `await` in `authenticateAll` API.
+
 ## 4.0.3 - 2018-07-26
 
 ### Fixed
