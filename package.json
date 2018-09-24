@@ -23,19 +23,19 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-passport",
   "dependencies": {
     "credentials-io": "~0.2.0",
-    "did-io": "digitalbazaar/did-io#update-terminology",
+    "did-io": "digitalbazaar/did-io#development",
     "http-signature-middleware": "digitalbazaar/http-signature-middleware#ocap-support",
-    "jsonld": "^1.0.1",
+    "jsonld": "^1.0.2",
     "jsonld-signatures": "^2.3.0",
     "passport": "~0.2.1"
   },
   "peerDependencies": {
     "bedrock": "^1.12.1",
     "bedrock-account": "^1.0.0",
-    "bedrock-did-client": "digitalbazaar/bedrock-did-client#did-io-0.7.x",
+    "bedrock-did-client": "^2.0.0",
     "bedrock-express": "^2.0.0",
     "bedrock-identity": "^5.0.0",
-    "bedrock-key": "^5.1.0"
+    "bedrock-key": "^5.1.1"
   },
   "directories": {
     "lib": "./lib"
