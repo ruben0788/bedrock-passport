@@ -3,7 +3,10 @@
   "version": "4.0.5-0",
   "description": "Bedrock passport module",
   "main": "lib",
-  "scripts": {},
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/digitalbazaar/bedrock-passport"
@@ -27,7 +30,8 @@
     "http-signature-middleware": "^1.0.0",
     "jsonld": "^1.0.1",
     "jsonld-signatures": "^2.3.0",
-    "passport": "~0.2.1"
+    "passport": "~0.2.1",
+    "snyk": "^1.163.3"
   },
   "peerDependencies": {
     "bedrock": "^1.12.1",
@@ -42,5 +46,6 @@
   },
   "engines": {
     "node": ">=8.6.0"
-  }
+  },
+  "snyk": true
 }
