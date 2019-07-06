@@ -1,0 +1,12 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - did-io > lodash:
+        patched: '2019-07-06T21:32:41.146Z'
+    - credentials-io > lodash:
+        patched: '2019-07-06T21:32:41.146Z'
+    - credentials-io > did-io > lodash:
+        patched: '2019-07-06T21:32:41.146Z'
