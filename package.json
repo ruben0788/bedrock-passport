@@ -22,11 +22,6 @@
   },
   "homepage": "https://github.com/digitalbazaar/bedrock-passport",
   "dependencies": {
-    "credentials-io": "~0.2.0",
-    "did-io": "^0.6.1",
-    "http-signature-middleware": "^1.0.0",
-    "jsonld": "^1.0.1",
-    "jsonld-signatures": "^2.3.0",
     "passport": "~0.2.1"
   },
   "peerDependencies": {
