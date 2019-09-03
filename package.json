@@ -28,8 +28,7 @@
     "bedrock": "^1.12.1",
     "bedrock-account": "^1.0.0",
     "bedrock-express": "^2.0.0",
-    "bedrock-identity": "^5.0.0",
-    "bedrock-key": "^5.1.0"
+    "bedrock-identity": "^5.0.0"
   },
   "directories": {
     "lib": "./lib"
