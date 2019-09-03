@@ -42,5 +42,9 @@
   },
   "engines": {
     "node": ">=8.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.3.0",
+    "eslint-config-digitalbazaar": "^2.0.1"
   }
 }
