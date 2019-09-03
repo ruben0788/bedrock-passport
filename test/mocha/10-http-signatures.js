@@ -11,7 +11,7 @@ const mockData = require('./mock.data');
 const url = require('url');
 const {util} = bedrock;
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const urlObj = {
   protocol: 'https',
